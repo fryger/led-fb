@@ -1,0 +1,45 @@
+// ==UserScript==
+// @name         New Userscript
+// @namespace    http://tampermonkey.net/
+// @version      0.1
+// @description  try to take over the world!
+// @author       You
+// @match        https://www.facebook.com/
+// @grant       GM_xmlhttpRequest
+// @require http://code.jquery.com/jquery-1.12.4.min.js
+// ==/UserScript==
+
+(function() {
+    function wys(){
+        GM_xmlhttpRequest ( {
+            method:     "POST",
+            url:        "http://192.168.88.219/ledy/",
+            data:       "red=a&green=&blue=",
+            headers:    {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            onload:     function (response) {
+                console.log(response.responseText);
+            },
+            onerror:    function(reponse) {
+                //alert('error');
+                console.log("error: ", reponse);
+            }
+        } );   
+
+    }
+
+    function spr(){
+        var nowa = $("#mercurymessagesCountValue").text();
+        if(nowa == 1){
+            wys();
+        }
+
+
+        setTimeout(spr, 7200);   
+
+    }
+
+    spr();
+
+})();
